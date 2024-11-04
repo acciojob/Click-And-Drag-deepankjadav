@@ -33,9 +33,36 @@
     <div class="item item24">24</div>
     <div class="item item25">25</div>
   </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 //Your code goes here 
+	$(document).ready(function() {
+    var isDragging = false;
+    var startPositionX, startPositionY;
+
+    // Add event listener for mouse down
+    $('.cube').mousedown(function(event) {
+        event.preventDefault();
+        isDragging = true;
+        startPositionX = event.pageX - $(this).offset().left;
+        startPositionY = event.pageY - $(this).offset().top;
+    });
+
+    // Add event listener for mouse move
+    $(document).mousemove(function(event) {
+        if (isDragging) {
+            var currentPositionX = event.pageX - startPositionX;
+            var currentPositionY = event.pageY - startPositionY;
+            $('.cube').css('left', currentPositionX + 'px');
+            $('.cube').css('top', currentPositionY + 'px');
+        }
+    });
+
+    // Add event listener for mouse up
+    $(document).mouseup(function(event) {
+        isDragging = false;
+    });
+});
 </script>
 
   </body>
